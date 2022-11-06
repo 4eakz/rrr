@@ -1,7 +1,7 @@
 {
   "name": "project",
   "version": "1.0.0",
-  "description": "",
+  "description": "Скачиваем недостающие модули:",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -21,9 +21,18 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.6.6",
     "multer": "^1.4.5-lts.1",
-    "react-bootstrap": "^2.5.0"
+    "react-bootstrap": "^2.5.0",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.20"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/20Tem/rrr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/20Tem/rrr/issues"
+  },
+  "homepage": "https://github.com/20Tem/rrr#readme"
 }

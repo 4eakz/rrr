@@ -206,9 +206,12 @@ export default function FullUser() {
 		<>
 		{data && (
 			<main>
-			<section class="section current-item">
+				<div class="AR">
+				<div class="container-xl ">
+				<div class="alert alert-dark shadow-sm" role="alert">
+				<section class="section current-item">
 				<div class="container">
-					{/* {editPost = false} */}
+
 					<div class="post__header block__header flex_fullUser">
 						
 					{showEditPost ? (
@@ -218,24 +221,8 @@ export default function FullUser() {
 					):(
 						<>
 						<h1 class="article__title post__title">{data.fullName}</h1>
-						<div class="article__semi-title post__author flex "><p class='fullPost_fullName'>{data.email}</p></div>
 						</>
 					)}
-						
-					</div>
-					<h4>Дата регистрации: {date}</h4><br />
-					<h4>Email: {data.email}</h4><br />
-					<h4>Posts: {userPosts}</h4><br />
-					<h4>Comments: {userComments}</h4>
-					
-					<div class="article__main post__main">
-						
-						{/* {showEditPost ? (
-							<textarea class="form__input form__input-textarea" rows="15" defaultValue={data.text} onChange ={(e) => setText(e.target.value)}></textarea>
-						):(
-							<p class="article__text post__text">{data.text}</p>
-						)}
-						 */}
 						<div class="post__actions user_actions">
 						{userData &&(
 							userData._id === data._id && (
@@ -247,17 +234,30 @@ export default function FullUser() {
 								</>
 							):(
 								<>
-								{/* <a href="#" class="btn deleete_post" onClick={() => removePost(data)}>Delete</a> */}
+								
 								<button class="btn deleete_post" onClick={editPost}>Edit</button>
 								</>
 							)}
-							
-							{/* <Link to = {`/posts/edit/${data._id}`}><a href="edit-post.html" class="btn">Edit</a></Link> */}
 							</>
 						)
 						)}
 							
 						</div>
+					</div>
+					<div class="ttr">
+					<div class="col-3 offset-1">
+					<h4>Дата регистрации: {date}</h4><br />
+					</div>
+				
+					<div class="col-3 offset-1">
+					<h4>Posts: {userPosts}</h4><br />
+					</div>
+					<div class="col-3 offset-1">
+					<h4>Comments: {userComments}</h4>
+					</div>
+					</div>
+					<div class="article__main post__main">
+						
 					</div>
 				</div>
 			</section>
@@ -323,30 +323,6 @@ export default function FullUser() {
 							))
 						)}
 					</ul>
-		
-					<div class="posts__pagination">
-						<div class="pagination__nav">
-							<div class="pagination__prev-actions pagination__page-list">
-								<button class="pagination__controls"><img src={first} alt="select"/></button>
-								<button class="pagination__controls"><img src={prev} alt="select"/></button>
-							</div>
-							<div class="pagination__prev-actions pagination__page-list">
-								<a class="pagination__controls pagination__controls--active">1</a>
-								<a class="pagination__controls">2</a>
-								<a class="pagination__controls">3</a>
-							</div>
-							<div class="pagination__prev-actions pagination__page-list">
-								<button class="pagination__controls"><img src={next} alt="select"/></button>
-								<button class="pagination__controls"><img src={last} alt="select"/></button>
-							</div>
-						</div>
-		
-						<div class="pagination__page-size">
-							<label for="page-size">Page size:</label>
-							<input type="text" class="page-size__input" id="page-size" value="25"/>
-							<button href="#" class="page-size__select"><img src={select} width="15px" alt="select"/></button>
-						</div>
-					</div>
 				</div>
 			</section>
 			{/* Комменты */}
@@ -404,30 +380,6 @@ export default function FullUser() {
 							))
 						)}
 					</ul>
-		
-					<div class="posts__pagination">
-						<div class="pagination__nav">
-							<div class="pagination__prev-actions pagination__page-list">
-								<button class="pagination__controls"><img src={first} alt="select"/></button>
-								<button class="pagination__controls"><img src={prev} alt="select"/></button>
-							</div>
-							<div class="pagination__prev-actions pagination__page-list">
-								<a class="pagination__controls pagination__controls--active">1</a>
-								<a class="pagination__controls">2</a>
-								<a class="pagination__controls">3</a>
-							</div>
-							<div class="pagination__prev-actions pagination__page-list">
-								<button class="pagination__controls"><img src={next} alt="select"/></button>
-								<button class="pagination__controls"><img src={last} alt="select"/></button>
-							</div>
-						</div>
-		
-						<div class="pagination__page-size">
-							<label for="page-size">Page size:</label>
-							<input type="text" class="page-size__input" id="page-size" value="25"/>
-							<button href="#" class="page-size__select"><img src={select} width="15px" alt="select"/></button>
-						</div>
-					</div>
 				</div>
 			</section>
 			{isAuth&&(
@@ -448,8 +400,13 @@ export default function FullUser() {
 						<input id="comment-submit" type="submit" class="btn" value="Add comment" onClick={addComment}/>
 					</form>
 				</div>
+				
 			</section>
+			
 			)};
+			</div>
+			</div>
+			</div>
 		</main>
 		)}
 		</>

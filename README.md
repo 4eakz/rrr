@@ -17,22 +17,6 @@ npm start
 
 npm run start:react
 
-
-Авторизация:
-
-Lermontov:
-    login: test@mail.ru
-    password: 54321
-
-Vasily:
-    login: test2@mail.ru
-    password: 12345
-
-User:
-    login: test3@mail.ru
-    password: 12345
-
-
 P.S.
 
 На вкладке comments присутствует пагинация
