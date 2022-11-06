@@ -286,6 +286,7 @@ export default function FullUser() {
 						
 							
 								<div class="col-6 offset-3">
+									
 									<div class="alert alert-secondary shadow-sm">
 								
 							<article class="article article--minimized">
@@ -339,6 +340,7 @@ export default function FullUser() {
 									</div>
 							</article>
 							</div>
+							<hr/>
 							</div>
 							
 							
@@ -346,12 +348,94 @@ export default function FullUser() {
 						)}
 				</div>
 			</section>
+			
+			
+		{/* Комменты */}
+	
+				<div class="container">
+					<div class="block__header flex new_comment_fullPost">
+						
+						<h2 class="text">Comments</h2>
+						{isAuth && (
+							<a href='#createComment'>
+							
+						</a>
+						)}
+					</div>
+
+					
+					{comments && (
+							(comments).map((obj, index) => (
+							
+								<div class="col-6 offset-3">
+								<div class="alert alert-secondary shadow-sm">
+							<article class="article article--minimized">
+								<header class="comment__header block__header flex gap comment_block">
+									<div className="gap">
+										<h3 class="article__title comment__title">{obj.title}</h3>
+										<div className="flex gap comment_fullName">
+											{obj.user !== null ? (<div class=" article__semi-title comment__author">author: {obj.user.fullName}</div>):(
+												<div class=" article__semi-title comment__author"><i>Пользователь удалён</i></div>
+											)}
+											{/* <div class=" article__semi-title comment__author">{date_comments}</div> */}
+											{day(obj.createdAt)}
+											{hour(obj.createdAt)}
+											{fullDate(index)}
+											<div class=" article__semi-title comment__author">{date_comment[index]}</div>
+										</div>
+									</div><br />
+									
+
+								</header>
+								<main class="article__main comment__main">
+									<p class="article__text comment__text">{obj.text}</p>
+									{userData &&(
+										obj.user !== null && (
+										userData._id === obj.user._id && (
+											<button class="btn btn-dark" onClick={() => removeComment(obj)}><img src={close} alt="" width='20px'/>Remove comment</button>
+										)
+										)
+									)}
+								</main>
+							</article>
+							</div>
+                </div>
+							))
+						)}
+					
+				</div>
+			
+			{isAuth&&(
+				<div class="col-6 offset-3">
+			 <div class="alert alert-secondary shadow-sm" role="alert">
+				<div class="container">
+					<form id="comment-creating-form" class="form">
+
+						<div class="block__header">
+							<h2 class="form__name">Create comment</h2>
+						</div>
+						<div class="form-group">
+						<label for="comment-title" class="form__label">Title</label>
+						<input type="text" id="comment-title" class="form-control" defaultValue={title_comment} onChange = {(e) => setTitle_comment(e.target.value)}/>
+						<label for="comment-body" class="form__label">Text</label>
+						<textarea id="comment-body" class="form-control" defaultValue={text_comment} onChange = {(e) => setText_comment(e.target.value)}></textarea>
+
+						</div>
+						<button class="btn btn-dark butt" onClick={addComment}>Add comment</button>
+					</form>
+				</div>
+				</div>
+				</div>
+			)}
 			</div>
 			</div>
 			</div>
+			
+			
+			
 		</main>
 		)}
 		</>
-		
+
 	);
   };

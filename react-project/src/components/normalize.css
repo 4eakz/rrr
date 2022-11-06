@@ -127,3 +127,9 @@ a:not([class]):hover {
     a{
     text-decoration: none;
     }
+    .imgr {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+      }

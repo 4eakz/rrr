@@ -121,24 +121,29 @@ export default function Users() {
 	// Переход на статью
 	return (
 		
-		<main class="main">
+		<main>
+			 <div class="AR">
+				
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"></link>
+<div class="container-xl ">
+	 <div class="alert alert-dark shadow-sm">
+	 <div class="col-6 offset-3">
     <section class="posts">
         <div class="container">
-
-            <header class="block__header  _flex--sb">
-                <h1>Users</h1>
-            </header>
 			{users && (
 					(users).map((obj, index) => (
-					// <div class='post' onClick={() => selectedPost(obj)}>
-					<Link to = {`/users/${obj._id}`}>
 						<div class='post'>
+							 <a >
+                         	<div class="alert alert-secondary shadow-sm">
 							<div className="post_header">
-								<img src={avatar} alt="avatar" width='50px'/>
-								<h3 className='post_h3'><i>{obj.fullName}</i></h3>
-								<div class="article__semi-title post__author flex "><p class='fullPost_fullName'>{obj.email}</p></div>
+								
+							<Link to = {`/users/${obj._id}`}>
+								
+								<h3 class="fw-bolder" className='post_h3'><i><a class="nav-link active" aria-current="page">{obj.fullName}</a></i></h3>
+								
+								</Link>
 							</div>
+							<hr/>
 							 {day(obj.createdAt)}
 							{hour(obj.createdAt)}
 							{fullDate(index)}
@@ -163,43 +168,21 @@ export default function Users() {
 							<h4 className='mt20'>Posts : {userPosts[index]}</h4>
 							<br />
 							<h4>Comments : {userComments[index]}</h4>
+							</div>
+							</a>
 							
 						</div>
-					</Link>
+					
 				))
 			)}
 
-            <ul class="articles__list">
-
-            </ul>
-
-            <div class="posts__pagination">
-                <div class="pagination__nav">
-                    <div class="pagination__prev-actions pagination__page-list">
-                        <button class="pagination__controls"><img src={first} alt="select"/></button>
-                        <button class="pagination__controls"><img src={prev} alt="select"/></button>
-                    </div>
-                    <div class="pagination__prev-actions pagination__page-list">
-                        <button class="pagination__controls pagination__controls--active">1</button>
-                        <button class="pagination__controls">2</button>
-                        <button class="pagination__controls">3</button>
-                    </div>
-                    <div class="pagination__prev-actions pagination__page-list">
-                        <button class="pagination__controls"><img src={next} alt="select"/></button>
-                        <button class="pagination__controls"><img src={last} alt="select"/></button>
-                    </div>
-                </div>
-
-                <div class="pagination__page-size">
-                    <label for="page-size">Page size:</label>
-                    <input type="text" class="page-size__input" id="page-size" value="25"/>
-                    <button href="#" class="page-size__select"><img src={select} width="15px" alt="select"/></button>
-                </div>
-            </div>
+           
         </div>
     </section>
-
-
+	</div>
+	</div>
+	</div>
+	</div>
 </main>
 	);
   };

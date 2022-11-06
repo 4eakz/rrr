@@ -196,6 +196,10 @@ export default function FullPost() {
 		<>
 		{data && (
 			<main>
+				<div class="AR">
+        <div class="container-xl ">
+            <div class="alert alert-dark shadow-sm " role="alert">
+                <div class="col-6 offset-3">
 			<section class="section current-item">
 				<div class="container">
 					{/* {editPost = false} */}
@@ -203,6 +207,7 @@ export default function FullPost() {
 						
 					{showEditPost ? (
 						<>
+						<label for="exampleInputEmail1" class="form-label">Заголовок</label><br/>
 						<input type="text" class="form__input" defaultValue={data.title} onChange = {(e) => setTitle(e.target.value)}></input>
 						</>
 					):(
@@ -241,13 +246,13 @@ export default function FullPost() {
 								<> 
 							{showEditPost ?(
 								<>
-								<button class="btn deleete_post" onClick={CanceleditPost}>Cancel</button>
-								<button class="btn" onClick={savePost}>Save</button>
+								<button class="btn deleete_post btn-dark" onClick={CanceleditPost}>Cancel</button>
+								<button class="btn btn-dark but" onClick={savePost}>Save</button>
 								</>
 							):(
 								<>
-								<a href="#" class="btn deleete_post" onClick={() => removePost(data)}>Delete</a>
-								<button class="btn deleete_post" onClick={editPost}>Edit</button>
+								<a href="#" class="btn deleete_post btn-dark" onClick={() => removePost(data)}>Delete</a>
+								<button class="btn deleete_post btn-dark but" onClick={editPost}>Edit</button>
 								</>
 							)}
 							
@@ -260,22 +265,16 @@ export default function FullPost() {
 					</div>
 				</div>
 			</section>
-			
+			</div>
+			</div>
+			</div>
+			</div>
 			<section class=" section comments">
 				<div class="container">
 		
 					<div class="block__header flex new_comment_fullPost">
 						<h2>Comments</h2>
-						{isAuth && (
-							<a href='#createComment'>
-							<button class="btn new-post-btn _flex--sb" id="new-post">
-								<svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M12 1V23M23 12H1" stroke="white" stroke-width="2" stroke-linecap="round"/>
-								</svg>
-								<span>New comment</span>
-							</button>
-						</a>
-						)}
+					
 					</div>
 		
 					<ul class="articles__list">
@@ -316,29 +315,6 @@ export default function FullPost() {
 							))
 						)}
 					</ul>
-					<div class="posts__pagination">
-						<div class="pagination__nav">
-							<div class="pagination__prev-actions pagination__page-list">
-								<button class="pagination__controls"><img src={first} alt="select"/></button>
-								<button class="pagination__controls"><img src={prev} alt="select"/></button>
-							</div>
-							<div class="pagination__prev-actions pagination__page-list">
-								<a class="pagination__controls pagination__controls--active">1</a>
-								<a class="pagination__controls">2</a>
-								<a class="pagination__controls">3</a>
-							</div>
-							<div class="pagination__prev-actions pagination__page-list">
-								<button class="pagination__controls"><img src={next} alt="select"/></button>
-								<button class="pagination__controls"><img src={last} alt="select"/></button>
-							</div>
-						</div>
-		
-						<div class="pagination__page-size">
-							<label for="page-size">Page size:</label>
-							<input type="text" class="page-size__input" id="page-size" value="25"/>
-							<button href="#" class="page-size__select"><img src={select} width="15px" alt="select"/></button>
-						</div>
-					</div>
 				</div>
 			</section>
 			{isAuth && (

@@ -76,6 +76,9 @@ a:not([class]):hover {
     --bs-code-color: #d63384;
     --bs-highlight-bg: #fff3cd;
   }
+  Link{ 
+    text-decoration: none;
+}
 .ye{
     margin-top: 60px;
     

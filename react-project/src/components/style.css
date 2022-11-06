@@ -72,6 +72,13 @@
   a:not([class]) {
     text-decoration: none;
 }
+Link{ 
+    text-decoration: none;
+}
+
+.name{
+padding-right: 50px;
+}
 
 a:not([class]):hover {
     text-decoration: underline;
@@ -111,12 +118,9 @@ a:not([class]):hover {
     
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
-    padding-left: 200px;
-  
-   
-    
+    justify-content: space-around;  
     }
+
     .ttc{
     
         display: flex;
@@ -134,4 +138,13 @@ a:not([class]):hover {
     }
     .but{
         margin-left: 10px;
+    }
+
+    .text{
+        margin-left: 310px;
+        
+    }
+
+    .butt{
+        margin-top: 20px;
     }

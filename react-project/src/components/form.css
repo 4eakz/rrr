@@ -76,6 +76,9 @@
 a:not([class]):hover {
     text-decoration: underline;
 }
+Link{ 
+    text-decoration: none;
+}
 .ye{
     margin-top: 60px;
     

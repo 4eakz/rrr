@@ -1,5 +1,5 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from '../axios.js'
 import '../components/normalize.css'
 import '../components/style.css'
@@ -14,10 +14,10 @@ import last from './img/page-last.svg'
 import avatar from './img/avatar.gif'
 import looked from './img/looked.png'
 import close from './img/close.png'
-import { fetchPosts} from '../redux/slices/posts.js';
-import {useNavigate} from "react-router-dom";
-import  { useDispatch, useSelector} from 'react-redux';
-import {selectIsAuth, fetchAuthMe} from '../redux/slices/auth.js';
+import { fetchPosts } from '../redux/slices/posts.js';
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAuth, fetchAuthMe } from '../redux/slices/auth.js';
 
 
 export default function Posts() {
@@ -27,178 +27,135 @@ export default function Posts() {
 	const isAuth = useSelector(selectIsAuth);
 
 	// Получаем юзера
-	React.useEffect(() =>{
+	React.useEffect(() => {
 		dispatch(fetchAuthMe())
 	}, [])
 	const userData = useSelector(state => state.auth.data);
-	
+
 	// Получаем статьи
-	React.useEffect(() =>{
+	React.useEffect(() => {
 		dispatch(fetchPosts())
 	}, [])
-	const {posts, tags} = useSelector(state => state.posts);
+	const { posts, tags } = useSelector(state => state.posts);
 
 
 	console.log('posts', posts)
 
 	// Удаляем статью
-	const removePost = async (obj) =>{
-		if(window.confirm('Вы действительно хотите удалить статью?')){
+	const removePost = async (obj) => {
+		if (window.confirm('Вы действительно хотите удалить статью?')) {
 			await axios.delete(`/posts/${obj._id}`).then(navigate(0));
 		}
-		
-	} 
+
+	}
 	// Дата и время
 	var date_day = [];
 	var date_hour = [];
 	var date = [];
-	let day = function (text){
+	let day = function (text) {
 		date_day = []
-		for (let i = 0; i < 10; i++){
+		for (let i = 0; i < 10; i++) {
 			date_day += '' + text[i];
-		  }
+		}
 	}
-	let hour = function (text){
+	let hour = function (text) {
 		date_hour = []
-		if ((Number(text[11]+text[12]) + 8) > 24){
-			date_hour = '0' + (Number(text[11]+text[12]) + 8 - 24)
+		if ((Number(text[11] + text[12]) + 8) > 24) {
+			date_hour = '0' + (Number(text[11] + text[12]) + 8 - 24)
 		}
 		else {
-			date_hour = '' + (Number(text[11]+text[12]) + 8)
+			date_hour = '' + (Number(text[11] + text[12]) + 8)
 		}
-		for (let i = 13; i < 16; i++){
-			date_hour +=  '' + text[i];
+		for (let i = 13; i < 16; i++) {
+			date_hour += '' + text[i];
 		}
 	}
-	let fullDate = function (index){
-		date[index] =date_day + ' | ' + date_hour;
+	let fullDate = function (index) {
+		date[index] = date_day + ' | ' + date_hour;
 	}
-	
+
 	// Переход на статью
 	return (
+
 		<main class="main">
 
-    <section class="posts">
-        <div class="container">
+			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"></link>
 
-            <header class="block__header  _flex--sb">
-                <h1>Posts</h1>
-				{isAuth && (
-              	<Link to='/posts/add'>
-                <button class="btn new-post-btn _flex--sb" id="new-post">
-                    <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 1V23M23 12H1" stroke="white" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <span>New post</span>
-                </button>
-				</Link>
+			<section class="posts">
+				<div class="AR">
+					<div class="container-xl">
+						<div class="alert alert-dark shadow-sm" role="alert">
 
-            )}
-				
-            </header>
-			{posts && (
-					(posts.items).map((obj, index) => (
-					// <div class='post' onClick={() => selectedPost(obj)}>
-					<Link to = {`/posts/${obj._id}`}>
-						<div class='post'>
-						<div className="post_header">
-							<img src={avatar} alt="avatar" width='50px'/>
-							{obj.user !== null ? (
-								<h4 className='post_h3'><i>{obj.user.fullName}</i></h4>
-							):(<div class=" article__semi-title comment__author"><i>Пользователь удалён</i></div>)}
-							
-							<h3>{obj.title}</h3>
-							{day(obj.createdAt)}
-							{hour(obj.createdAt)}
-							{fullDate(index)}
-							<h4>{date[index]}</h4>
-							<img src={looked} alt="" width='18px'/>
-							<h4 className='post_looked_num'>{obj.viewsCount}</h4>
-							{/* {userData._id === obj.user._id && (
-							<button className='post_close' onClick={() => removePost(obj)}><img src={close} alt="" width='20px'/></button>
-							)} */}
-							</div>
-							{obj.imageUrl !== '' && (
-								<div class='post_text'> <img src={`http://localhost:4444${obj.imageUrl}`} alt="" /></div>
+
+
+
+							{isAuth && (
+								<Link to='/posts/add'>
+									<div class="col-3 offset-10">
+										<button class="btn btn-dark" id="new-post">
+											<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+												<path d="M12 1V23M23 12H1" stroke="white" stroke-width="2" stroke-linecap="round" />
+											</svg>
+											<span> New post</span>
+										</button>
+									</div>
+									<div clss="vert">
+
+									</div>
+								</Link>
+
 							)}
-							
-							<p class='post_text'>{obj.text}</p>
-							</div>
-						</Link>
-				))
-			)}
 
-			{/* Кнопка (крестик) чтобы удалить пост напрямую, тут условие чтобы он не показывался на тех постах, которые нельзя удалить, т.к. пользователь не является автором  */}
-			{isAuth ? (
-				(posts.items).map((obj, index) => (
-					<Link to="/comments">
-					<div class='post'>
-					<div className="post_header">
-						<img src={avatar} alt="avatar" width='50px'/>
-						<h3 className='post_h3'><i>{obj.user.fullName}</i></h3>
-						<h3>{obj.title}</h3>
-						{day(obj.createdAt)}
-						{hour(obj.createdAt)}
-						{fullDate(index)}
-						<h4>{date[index]}</h4>
 
-						{userData._id === obj.user._id && (
-						<button className='post_close' onClick={() => removePost(obj)}><img src={close} alt="" width='20px'/></button>
-						)}
+
+							{posts && (
+
+
+								(posts.items).map((obj, index) => (
+									
+									<div class="col-6 offset-3">
+										<div class="alert alert-secondary shadow-sm" role="alert">
+											<div class="tt">
+												<h4 class="alert-heading">{obj.title}</h4>
+												<h5 className='post_looked_num'><img src={looked} alt="" width='18px' /> {obj.viewsCount}</h5>
+											</div>
+											<hr />
+											{obj.imageUrl !== '' && (
+												<div class='post_text'> <img class="imgr" src={`http://localhost:4444${obj.imageUrl}`} alt="" /></div>
+											)}
+
+											<p class='post_text'>{obj.text}</p>
+											<hr />
+											<div class="tt">
+
+												<p class="mb-0">Автор:<Link to={`/users/${obj.user._id}`}> <a class="alert-link"> {obj.user !== null ? (<i>{obj.user.fullName}</i>) :
+												(<div class=" alert-link"><i>DELETED</i></div>)}
+												</a>
+												</Link>
+												</p>
+
+												<Link to={`/posts/${obj._id}`}>
+
+														<button type="button" class="btn btn-dark position-relative shadow">
+															Посмотреть <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2 "></span>
+														</button>
+												</Link>
+
+											</div>
+										</div>
+									</div>
+								
+								))
+							)}
+
+
+						</div>
 					</div>
-					{obj.text}
-					</div>
-					</Link>
-				))
-			):(
-				(posts.items).map((obj, index) => (
-					<div class='post'>
-					<div className="post_header">
-						<img src={avatar} alt="avatar" width='50px'/>
-						<h3 className='post_h3'>{obj.user.fullName}</h3>
-						<h3>{obj.title}</h3>
-						{day(obj.createdAt)}
-						{hour(obj.createdAt)}
-						{fullDate(index)}
-						<h4>{date[index]}</h4>
-					</div>
-					{obj.text}
-					</div>
-				))	
-			)}
-
-            <ul class="articles__list">
-
-            </ul>
-{/* Пагинаци */}
-            <div class="posts__pagination">
-                <div class="pagination__nav">
-                    <div class="pagination__prev-actions pagination__page-list">
-                        <button class="pagination__controls"><img src={first} alt="select"/></button>
-                        <button class="pagination__controls"><img src={prev} alt="select"/></button>
-                    </div>
-                    <div class="pagination__prev-actions pagination__page-list">
-                        <button class="pagination__controls pagination__controls--active">1</button>
-                        <button class="pagination__controls">2</button>
-                        <button class="pagination__controls">3</button>
-                    </div>
-                    <div class="pagination__prev-actions pagination__page-list">
-                        <button class="pagination__controls"><img src={next} alt="select"/></button>
-                        <button class="pagination__controls"><img src={last} alt="select"/></button>
-                    </div>
-                </div>
-
-                <div class="pagination__page-size">
-                    <label for="page-size">Page size:</label>
-                    <input type="text" class="page-size__input" id="page-size" value="25"/>
-                    <button href="#" class="page-size__select"><img src={select} width="15px" alt="select"/></button>
-                </div>
-            </div>
-        </div>
-    </section>
+				</div>
+			</section>
 
 
-</main>
+		</main>
 
 	);
-  };
+};

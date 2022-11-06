@@ -1,23 +1,23 @@
 import React from 'react';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from '../axios.js'
 import '../components/normalize.css'
 import '../components/style.css'
 import '../components/article.css'
 import '../components/pagination.css'
 import '../components/myFastCss.css'
-import  { useDispatch, useSelector} from 'react-redux';
-import {selectIsAuth, fetchAuthMe} from '../redux/slices/auth.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectIsAuth, fetchAuthMe } from '../redux/slices/auth.js';
 export default function Posts_add() {
 	const inputFileRef = React.useRef(null)
 	const [imageUrl, setImageUrl] = React.useState('');
 	const handleChangeFule = async (event) => {
 		console.log(event.target.files)
-		try{
+		try {
 			const formData = new FormData();
 			const file = event.target.files[0]
 			formData.append('image', file);
-			const { data } = await axios.post('/uploads', formData); 
+			const { data } = await axios.post('/uploads', formData);
 			console.log(data)
 			setImageUrl(data.url)
 
@@ -31,13 +31,13 @@ export default function Posts_add() {
 	}
 	const [title, setTitle] = React.useState('');
 	const [text, setText] = React.useState('');
-	const onChange = React.useCallback((value)=>{
+	const onChange = React.useCallback((value) => {
 		setText(value);
-	},[])
-	console.log({title, text})
-	
+	}, [])
+	console.log({ title, text })
+
 	const dispatch = useDispatch();
-	React.useEffect(() =>{
+	React.useEffect(() => {
 		dispatch(fetchAuthMe())
 	}, [])
 	const userData = useSelector(state => state.auth.data);
@@ -51,10 +51,10 @@ export default function Posts_add() {
 				title, text, user, imageUrl
 			}
 			await axios.post('/posts', fields).then(navigate('/posts'));
-			
+
 			// const {data} = await axios.post('/posts', fields);
 			// const id = data._id;
-			
+
 
 		} catch (err) {
 			console.warn(err);
@@ -63,42 +63,62 @@ export default function Posts_add() {
 	}
 	return (
 		<main>
-        <section class="form">
-            <div class="container">
-                <form action="" id="post-creating-form" class="form">
+			<section class="form">
+				<form action="" id="post-creating-form" class="form">
+					<div class="AR">
+						<div class="container-xl ">
+							<div class="alert alert-dark shadow-sm " role="alert">
+								<div clss="vert">
+								</div>
+								<div class="col-6 offset-3">
+									<h2>Create post</h2>
+									<div class="alert alert-secondary shadow-sm" role="alert">
 
-                    <div class="block__header">
-                        <h2 class="form__name">Create post</h2>
-                    </div>
+										<div class="mb-3">
 
-                    <p class="form__label">Image</p>
-					{imageUrl &&(
-						<div className='mb20'><img src={`http://localhost:4444${imageUrl}`} alt="" /></div>
+											<label for="postTitle" class="form__label">Заголовок</label>
+											<input type="text" id="postTitle" class="form-control" value={title} onChange={(e) => setTitle(e.target.value)} />
 
-					)}
-					<a onClick={() => inputFileRef.current.click()} className='btn_image mb20'><p className='btn_image_text'>Вставить картинку</p></a>
-					<input ref={inputFileRef} hidden type="file" id="upload" onChange={handleChangeFule}/>
-					{imageUrl &&(
-						<>
-						<a onClick={() => onClickRemoveImage()} className='btn_image mb20 ml20'><p className='btn_image_text'>Удалить картинку</p></a>
-						</>
+										</div>
+										<div class="form-group">
 
-					)}
-                    <label for="postTitle" class="form__label">Title</label>
-                    <input type="text" id="postTitle" class="form__input" value={title} onChange ={(e) => setTitle(e.target.value)}/>
+											<label for="postBody" class="form__label">Содержание</label>
+											<textarea id="postBody" class="form-control" rows="12" value={text} onChange={(e) => setText(e.target.value)}></textarea>
 
-                    <label for="postBody" class="form__label">Body</label>
-                    <textarea id="postBody"  class="form__input form__input-textarea" rows="15" value={text} onChange ={(e) => setText(e.target.value)}></textarea>
-					{/* <label for='inputFile'>123123123</label> */}
-					{/* <input id='inputFile hidden' type="file"/> */}
-						<input type="submit" class="btn" value="Add post" onClick={onSubmit}/>
-					
-                    <span class="_caution form__error"></span>
-                </form>
-				
-            </div>
-        </section>
-		
-    </main>
+										</div>
+										<br />
+
+
+
+
+										{imageUrl && (
+
+											<div className='mb20'><img class="imgr" src={`http://localhost:4444${imageUrl}`} alt="" /></div>
+
+										)}
+										<div class="tt">
+
+											<a onClick={() => inputFileRef.current.click()}> <button class='btn btn-dark'>Вставить картинку ←</button></a>
+											<input ref={inputFileRef} hidden type="file" id="upload" onChange={handleChangeFule} />
+
+											{imageUrl && (
+
+												<>
+													<a onClick={() => onClickRemoveImage()}><p class='btn btn-dark'>Убрать картинку ←</p></a>
+												</>
+
+											)}
+
+											<p type="submit" class="btn btn-dark" value="Add post" onClick={onSubmit} >Add post</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</section>
+
+		</main>
 	);
-  };
+};
