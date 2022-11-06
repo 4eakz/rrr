@@ -45,17 +45,11 @@ export default function Posts_add() {
 	const navigate = useNavigate();
 	const onSubmit = async () => {
 		try {
-			// setLoading(true);
 			console.log(imageUrl)
 			const fields = {
 				title, text, user, imageUrl
 			}
 			await axios.post('/posts', fields).then(navigate('/posts'));
-
-			// const {data} = await axios.post('/posts', fields);
-			// const id = data._id;
-
-
 		} catch (err) {
 			console.warn(err);
 			alert('Ошибка при создании статьи!')
@@ -73,28 +67,17 @@ export default function Posts_add() {
 								<div class="col-6 offset-3">
 									<h2>Create post</h2>
 									<div class="alert alert-secondary shadow-sm" role="alert">
-
 										<div class="mb-3">
-
 											<label for="postTitle" class="form__label">Заголовок</label>
 											<input type="text" id="postTitle" class="form-control" value={title} onChange={(e) => setTitle(e.target.value)} />
-
 										</div>
 										<div class="form-group">
-
 											<label for="postBody" class="form__label">Содержание</label>
 											<textarea id="postBody" class="form-control" rows="12" value={text} onChange={(e) => setText(e.target.value)}></textarea>
-
 										</div>
 										<br />
-
-
-
-
 										{imageUrl && (
-
 											<div className='mb20'><img class="imgr" src={`http://localhost:4444${imageUrl}`} alt="" /></div>
-
 										)}
 										<div class="tt">
 
@@ -106,9 +89,7 @@ export default function Posts_add() {
 												<>
 													<a onClick={() => onClickRemoveImage()}><p class='btn btn-dark'>Убрать картинку ←</p></a>
 												</>
-
 											)}
-
 											<p type="submit" class="btn btn-dark" value="Add post" onClick={onSubmit} >Add post</p>
 										</div>
 									</div>

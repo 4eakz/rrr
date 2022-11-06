@@ -6,49 +6,29 @@ import '../components/style.css'
 import '../components/article.css'
 import '../components/pagination.css'
 import '../components/myFastCss.css'
-import select from './img/select.svg'
-import first from './img/page-first.svg'
-import prev from './img/page-prev.svg'
-import next from './img/page-next.svg'
-import last from './img/page-last.svg'
-import avatar from './img/avatar.gif'
 import looked from './img/looked.png'
-import close from './img/close.png'
 import { fetchPosts } from '../redux/slices/posts.js';
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { selectIsAuth, fetchAuthMe } from '../redux/slices/auth.js';
-
-
 export default function Posts() {
-
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const isAuth = useSelector(selectIsAuth);
-
-	// Получаем юзера
 	React.useEffect(() => {
 		dispatch(fetchAuthMe())
 	}, [])
 	const userData = useSelector(state => state.auth.data);
-
-	// Получаем статьи
 	React.useEffect(() => {
 		dispatch(fetchPosts())
 	}, [])
 	const { posts, tags } = useSelector(state => state.posts);
-
-
 	console.log('posts', posts)
-
-	// Удаляем статью
 	const removePost = async (obj) => {
 		if (window.confirm('Вы действительно хотите удалить статью?')) {
 			await axios.delete(`/posts/${obj._id}`).then(navigate(0));
 		}
-
 	}
-	// Дата и время
 	var date_day = [];
 	var date_hour = [];
 	var date = [];
@@ -73,22 +53,13 @@ export default function Posts() {
 	let fullDate = function (index) {
 		date[index] = date_day + ' | ' + date_hour;
 	}
-
-	// Переход на статью
 	return (
-
 		<main class="main">
-
 			<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous"></link>
-
 			<section class="posts">
 				<div class="AR">
 					<div class="container-xl">
 						<div class="alert alert-dark shadow-sm" role="alert">
-
-
-
-
 							{isAuth && (
 								<Link to='/posts/add'>
 									<div class="col-3 offset-10">
@@ -105,12 +76,7 @@ export default function Posts() {
 								</Link>
 
 							)}
-
-
-
 							{posts && (
-
-
 								(posts.items).map((obj, index) => (
 									
 									<div class="col-6 offset-3">

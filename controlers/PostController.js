@@ -118,7 +118,6 @@ export const create = async (req,res) =>{
 			text: req.body.text,
 			imageUrl:req.body.imageUrl,
 			tags: req.body.tags,
-			// user: req.userId,
 			user: req.body.user,
 		})
 

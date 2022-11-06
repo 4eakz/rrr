@@ -10,21 +10,16 @@ import FullPost from './pages/fullPost.jsx';
 import FullUser from './pages/fullUser';
 import Users from './pages/users.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import PostEdit from './pages/postEdit';
 import  { useDispatch, useSelector} from 'react-redux';
 import { fetchAuthMe , selectIsAuth} from './redux/slices/auth.js';
 function App() {
 	const isAuth = useSelector(selectIsAuth);
-	// const dispatch = useDispatch();
-	// React.useEffect(() => {
-	// 	dispatch(fetchAuthMe())
-	// }, [])
 	return (
 		<>
 		<Routes>
 			<Route path='/' element = {<Posts/>}/>
 			<Route path='/posts/:id' element = {<FullPost/>}/>
-			{/* <Route path='/posts/edit/:id' element = {<PostEdit/>}/> */}
+
 			<Route path='/login' element = {<Login/>}/>
 			<Route path='/users' element = {<Users/>}/>
 			<Route path='/users/:id' element = {<FullUser/>}/>
@@ -38,6 +33,3 @@ function App() {
   )};
 
 export default App;
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals

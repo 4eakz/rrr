@@ -4,21 +4,12 @@ import '../components/style.css'
 import '../components/article.css'
 import '../components/pagination.css'
 import '../components/myFastCss.css'
-import select from './img/select.svg'
-import first from './img/page-first.svg'
-import prev from './img/page-prev.svg'
-import next from './img/page-next.svg'
-import last from './img/page-last.svg'
 import axios from '../axios.js'
 import {useNavigate, Link , useParams} from "react-router-dom";
 import  { useDispatch, useSelector} from 'react-redux';
 import {selectIsAuth, fetchAuthMe} from '../redux/slices/auth.js';
-
 export default function PostEdit() {
-	// Получаем id статьи из параметров (из Link)
 	const {id} = useParams();
-
-	// Записываем результат в data
 	const [data, setData] = React.useState();
 	React.useEffect(() =>{
 		axios.get(`/posts/${id}`).then(res =>{
@@ -30,22 +21,15 @@ export default function PostEdit() {
 	}, [])
 	console.log('params', id)
 	console.log('data', data)
-
-	// Удаляем статью
 	const navigate = useNavigate();
 	const removePost = async (obj) =>{
 		await axios.delete(`/posts/${obj._id}`).then(navigate('/posts'));
 	} 
-	// console.log('userData', userData)
-
-	// Получаем юзера
 	const dispatch = useDispatch();
 	React.useEffect(() => {
 		dispatch(fetchAuthMe())
 	}, [])
 	const userData = useSelector(state => state.auth.data);
-
-	// Дата и время
 	if (data){
 		var date_day = [];
 		var date_hour = [];
@@ -65,8 +49,6 @@ export default function PostEdit() {
 		var date = date_day + ' | ' + date_hour;
 		console.log('date ready', date);
 	}
-	
-
 	return (
 		<>
 		{data && (

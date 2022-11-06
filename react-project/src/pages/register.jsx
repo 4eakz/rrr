@@ -6,14 +6,10 @@ import '../components/style.css'
 import '../components/form.css'
 import {selectIsAuth, fetchAuth} from '../redux/slices/auth.js';
 import  { useDispatch, useSelector} from 'react-redux';
-
-
-
 export default function Register() {
 	const [fullName, setfullName] = React.useState('');
 	const [email, setEmail] = React.useState('');
 	const [password, setpassword] = React.useState('');
-
 	console.log({email,password,fullName})
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
@@ -77,7 +73,6 @@ export default function Register() {
                             <input type="password" id="user-password-again" name="passwordAgain" class="form-control"/>
 				</div>
 
-                    {/* <span class="_caution form__error"></span> */}
 
         </form>
 				<div class="FL">

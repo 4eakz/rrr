@@ -6,12 +6,6 @@ import '../components/style.css'
 import '../components/article.css'
 import '../components/pagination.css'
 import '../components/myFastCss.css'
-import select from './img/select.svg'
-import first from './img/page-first.svg'
-import prev from './img/page-prev.svg'
-import next from './img/page-next.svg'
-import last from './img/page-last.svg'
-import avatar from './img/avatar.gif'
 import { fetchPosts} from '../redux/slices/posts.js';
 import {fetchUsers} from '../redux/slices/users.js';
 import {useNavigate} from "react-router-dom";
@@ -24,14 +18,10 @@ export default function Users() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const isAuth = useSelector(selectIsAuth);
-	
-	// Получаем все посты
 	React.useEffect(() =>{
 		dispatch(fetchPosts())
 	}, [])
 	const {posts} = useSelector(state => state.posts);
-
-	// Получаем юзера
 	React.useEffect(() =>{
 		dispatch(fetchAuthMe())
 	}, [])
@@ -39,16 +29,11 @@ export default function Users() {
 	
 	const [usersLength, setusersLength] = React.useState();
 	const [commentLength, setCommentLength] = React.useState();
-
-	// Получаем всех пользователей
 	const [users, setUsers] = React.useState();
 	React.useEffect(() =>{
 		axios.get(`/users`).then(res =>{
-			// Получаем комментарии
 			setUsers(res.data);
 			setusersLength(res.data.length)
-			// Передаём кол-во комментов
-			// setQuantity(res.data.length);
 		}).catch((err) => {
 			console.warn(err);
 			alert('Ошибка при получении комментариев')
@@ -56,13 +41,12 @@ export default function Users() {
 
 	}, [])
 
-	// Получаем комментарий в comments
 	const [comments, setComment] = React.useState();
 	React.useEffect(() =>{
 		axios.get(`/comments`).then(res =>{
-			// Получаем комментарии
+
 			setComment(res.data);
-			// Передаём кол-во комментов
+	
 			setCommentLength(res.data.length);
 		}).catch((err) => {
 			console.warn(err);
@@ -91,7 +75,6 @@ export default function Users() {
 		console.log(index)
 	}
 
-	// Дата и время
 	var date_day = [];
 	var date_hour = [];
 	var date = [];
@@ -118,7 +101,7 @@ export default function Users() {
 	}
 	console.log('posts', posts)
 	console.log('comments', comments)
-	// Переход на статью
+
 	return (
 		
 		<main>

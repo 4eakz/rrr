@@ -6,11 +6,8 @@ import { registerValidation, loginValidation, postCreateValidation} from './vali
 import * as UserController from './controlers/UserController.js';
 import * as PostController from './controlers/PostController.js';
 import * as CommentsController from './controlers/CommentsController.js';
-
 import checkAuth from './utils/checkAuth.js';
 import handleValidationErrors from './utils/handleValidationErrors.js';
-// import user from './modules/user.js';
-
 mongoose
 .connect('mongodb+srv://qwerty:qwerty123@cluster0.ivyl8eo.mongodb.net/auth_roles?retryWrites=true&w=majority')
 .then(() =>console.log('DB OK'))
@@ -42,7 +39,6 @@ app.post('/uploads',checkAuth, upload.single('image'), (req,res) => {
 	});
 });
 
-// app.post('/comments', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
 app.post('/comments', checkAuth, CommentsController.create);
 app.get('/comments', CommentsController.getAll);
 app.get('/comments/:id', CommentsController.getPost);

@@ -4,24 +4,15 @@ import '../components/style.css'
 import '../components/article.css'
 import '../components/pagination.css'
 import '../components/myFastCss.css'
-import select from './img/select.svg'
-import first from './img/page-first.svg'
-import prev from './img/page-prev.svg'
-import next from './img/page-next.svg'
-import last from './img/page-last.svg'
 import axios from '../axios.js'
 import {useNavigate, Link , useParams} from "react-router-dom";
 import  { useDispatch, useSelector} from 'react-redux';
 import {selectIsAuth, fetchAuthMe} from '../redux/slices/auth.js';
 import close from './img/close.png';
 import looked from './img/looked.png'
-
 export default function FullUser() {
-	// Получаем id статьи из параметров (из Link)
 	const {id} = useParams();
 	const isAuth = useSelector(selectIsAuth);
-
-	// Записываем результат в data
 	const [data, setData] = React.useState();
 	React.useEffect(() =>{
 		axios.get(`/users/${id}`).then(res =>{
@@ -32,8 +23,6 @@ export default function FullUser() {
 			alert('Ошибка при получении статьи')
 		})
 	}, [])
-
-	// Получаем комментарий в comments
 	const [comments, setComment] = React.useState();
 	const [userComments, setUserComment] = React.useState();
 	React.useEffect(() =>{
@@ -46,9 +35,6 @@ export default function FullUser() {
 		})
 
 	}, [])
-
-
-	// Получаем посты в posts
 	const [posts, setPosts] = React.useState();
 	const [userPosts, setUserPost] = React.useState();
 	React.useEffect(() =>{
@@ -60,38 +46,27 @@ export default function FullUser() {
 			alert('Ошибка при получении комментариев')
 		})
 	}, [])
-
-	// Удаляем статью
 	const navigate = useNavigate();
 	const removeUser = async (obj) =>{
 		if(window.confirm('Вы действительно хотите удалить спользователя')){
 			await axios.delete(`/posts/${obj._id}`).then(navigate('/posts'));
 		}
 	} 
-	// Удаляем пост
 	const removePost = async (obj) =>{
 		if(window.confirm('Вы действительно хотите удалить статью?')){
 			await axios.delete(`/posts/${obj._id}`).then(navigate(0));
 		}
 	} 
-
-	// Удаление комментария
-	// const navigate = useNavigate();
 	const removeComment = async (obj) =>{
 		if(window.confirm('Вы действительно хотите удалить комментарий?')){
 			await axios.delete(`/comments/${obj._id}`).then(navigate(0));
 		}
 	} 
-	// console.log('userData', userData)
-
-	// Получаем юзера
 	const dispatch = useDispatch();
 	React.useEffect(() => {
 		dispatch(fetchAuthMe())
 	}, [])
 	const userData = useSelector(state => state.auth.data);
-
-	// Дата и время
 	if (data){
 		var date_day = [];
 		var date_hour = [];
@@ -110,28 +85,7 @@ export default function FullUser() {
 		}
 		
 		var date = date_day + ' | ' + date_hour;
-
-		// Время изменения статьи
-		// if (data.createdAt !== data.updatedAt){
-		// 	var date_day_edit = [];
-		// 	var date_hour_edit = [];
-		// 	for (let i = 0; i < 10; i++){
-		// 		date_day_edit  += '' + data.updatedAt[i];
-		// 	}
-		// 	if ((Number(data.updatedAt[11]+data.updatedAt[12]) + 8) > 24){
-		// 		date_hour_edit = '0' + (Number(data.updatedAt[11]+data.updatedAt[12]) + 8 - 24)
-		// 	}
-		// 	else {
-		// 		date_hour_edit = '' + (Number(data.updatedAt[11]+data.updatedAt[12]) + 8)
-		// 	}
-		// 	for (let i = 13; i < 16; i++){
-		// 		date_hour_edit +=  '' + data.updatedAt[i];
-		// 	}
-		// 	var date = date + ' Edited: ' + date_day_edit  + ' | ' + date_hour_edit;
-		// }
 	}
-
-	// Дата и время создания коммента
 	var date_day_comment = [];
 	var date_hour_comment = [];
 	var date_comment = [];
@@ -156,8 +110,6 @@ export default function FullUser() {
 	let fullDate = function (index){
 		date_comment[index] = date_day_comment + ' | ' + date_hour_comment;
 	}
-
-	// Редактирование поста
 	const [showEditPost, setShowEditPost] = React.useState(false)
 	const editPost = () =>{
 		setShowEditPost(true)
@@ -165,10 +117,7 @@ export default function FullUser() {
 	const CanceleditPost = () =>{
 		setShowEditPost(false)
 	}
-	// Отправить отредактированный пост
 	const [fullName, setFullName] = React.useState();
-	// const [text, setText] = React.useState();
-
 	const savePost = async () =>{
 
 		try {
@@ -182,11 +131,8 @@ export default function FullUser() {
 			alert('Ошибка при создании статьи!')
 		}
 	}
-	// Отправить комментарий
 	const [title_comment, setTitle_comment] = React.useState();
 	const [text_comment, setText_comment] = React.useState();
-
-
 	const addComment = async () =>{
 		const title = title_comment
 		const text = text_comment
@@ -260,8 +206,8 @@ export default function FullUser() {
 					<div class="article__main post__main">
 					</div>
 				</div>
+				<hr/>
 			</section>
-			{/* Посты */}
 			<section class=" section comments">
 				<div class="container">
 					<div class="block__header flex new_comment_fullPost tt">
@@ -279,8 +225,6 @@ export default function FullUser() {
 							)
 						)}
 					</div>
-		
-					
 					{posts && (
 							(posts).map((obj, index) => (
 						
@@ -340,17 +284,17 @@ export default function FullUser() {
 									</div>
 							</article>
 							</div>
-							<hr/>
 							</div>
-							
-							
+
 							))
 						)}
+
+<div class="col-6 offset-3">
+																<hr/>
+							</div>
 				</div>
 			</section>
 			
-			
-		{/* Комменты */}
 	
 				<div class="container">
 					<div class="block__header flex new_comment_fullPost">
@@ -377,7 +321,7 @@ export default function FullUser() {
 											{obj.user !== null ? (<div class=" article__semi-title comment__author">author: {obj.user.fullName}</div>):(
 												<div class=" article__semi-title comment__author"><i>Пользователь удалён</i></div>
 											)}
-											{/* <div class=" article__semi-title comment__author">{date_comments}</div> */}
+										
 											{day(obj.createdAt)}
 											{hour(obj.createdAt)}
 											{fullDate(index)}
@@ -402,7 +346,9 @@ export default function FullUser() {
                 </div>
 							))
 						)}
-					
+																				<div class="col-6 offset-3">
+																<hr/>
+							</div>
 				</div>
 			
 			{isAuth&&(
