@@ -112,6 +112,10 @@ a:not([class]):hover {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    padding-left: 200px;
+  
+   
+    
     }
     .ttc{
     
@@ -128,4 +132,6 @@ a:not([class]):hover {
     a{
     text-decoration: none;
     }
-    
+    .but{
+        margin-left: 10px;
+    }

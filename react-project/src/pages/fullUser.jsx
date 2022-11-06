@@ -13,7 +13,8 @@ import axios from '../axios.js'
 import {useNavigate, Link , useParams} from "react-router-dom";
 import  { useDispatch, useSelector} from 'react-redux';
 import {selectIsAuth, fetchAuthMe} from '../redux/slices/auth.js';
-import close from './img/close.png'
+import close from './img/close.png';
+import looked from './img/looked.png'
 
 export default function FullUser() {
 	// Получаем id статьи из параметров (из Link)
@@ -212,7 +213,7 @@ export default function FullUser() {
 				<section class="section current-item">
 				<div class="container">
 
-					<div class="post__header block__header flex_fullUser">
+					<div class="post__header block__header flex_fullUser tt">
 						
 					{showEditPost ? (
 						<>
@@ -229,13 +230,12 @@ export default function FullUser() {
 								<> 
 							{showEditPost ?(
 								<>
-								<button class="btn deleete_post" onClick={CanceleditPost}>Cancel</button>
-								<button class="btn" onClick={savePost}>Save</button>
+								<button class="btn deleete_post btn-dark" onClick={CanceleditPost}>Cancel</button>
+								<button class="btn btn-dark but" onClick={savePost}>Save</button>
 								</>
 							):(
 								<>
-								
-								<button class="btn deleete_post" onClick={editPost}>Edit</button>
+								<button class="btn deleete_post btn-dark" onClick={editPost}>Edit</button>
 								</>
 							)}
 							</>
@@ -244,166 +244,108 @@ export default function FullUser() {
 							
 						</div>
 					</div>
+					
 					<div class="ttr">
-					<div class="col-3 offset-1">
-					<h4>Дата регистрации: {date}</h4><br />
+					<div class="col-4 offset-0">
+					<h5>Дата регистрации: {date}</h5><br/>
 					</div>
 				
-					<div class="col-3 offset-1">
-					<h4>Posts: {userPosts}</h4><br />
+					<div class="col-2 offset-1">
+					<h5>Posts: {userPosts}</h5><br />
 					</div>
-					<div class="col-3 offset-1">
-					<h4>Comments: {userComments}</h4>
+					<div class="col-4 offset-0">
+					<h5>Comments: {userComments}</h5>
 					</div>
 					</div>
 					<div class="article__main post__main">
-						
 					</div>
 				</div>
 			</section>
 			{/* Посты */}
 			<section class=" section comments">
 				<div class="container">
-					<div class="block__header flex new_comment_fullPost">
-						<h2>Posts</h2>
+					<div class="block__header flex new_comment_fullPost tt">
+						<label for="PostsCY" class="form-label"><h5>Posts</h5></label>
 						{isAuth && (
 							userData._id === data._id &&(
 							<Link to="/posts/add">
-							<button class="btn new-post-btn _flex--sb" id="new-post">
-								<svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M12 1V23M23 12H1" stroke="white" stroke-width="2" stroke-linecap="round"/>
-								</svg>
-								<span>New post</span>
-							</button>
+							 <button class="btn btn-dark" id="new-post">
+                    <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg%22%3E">
+                        <path d="M12 1V23M23 12H1" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <span> New post</span>
+                </button>
 							</Link>
 							)
 						)}
 					</div>
 		
-					<ul class="articles__list">
+					
 					{posts && (
 							(posts).map((obj, index) => (
-							<li class="articles__item">
-							<Link to={`/posts/${obj._id}`}>
+						
+							
+								<div class="col-6 offset-3">
+									<div class="alert alert-secondary shadow-sm">
+								
 							<article class="article article--minimized">
 								<header class="comment__header block__header flex gap comment_block">
 									<div className="gap">
+									<div class="tt">
 										<h3 class="article__title comment__title">{obj.title}</h3>
+										<h5 className='post_looked_num'><img src={looked} alt="" width='18px' /> {obj.viewsCount}</h5>
+										</div>
 										<div className="flex gap comment_fullName">
-											{obj.user !== null ? (<div class=" article__semi-title comment__author">{obj.user.fullName}</div>):(
-												<div class=" article__semi-title comment__author"><i>Пользователь удалён</i></div>
-											)}
-											{/* <div class=" article__semi-title comment__author">{date_comments}</div> */}
+										
+
 											{day(obj.createdAt)}
 											{hour(obj.createdAt)}
 											{fullDate(index)}
+											
 											<div class=" article__semi-title comment__author">{date_comment[index]}</div>
+											
 										</div>
 									</div><br />
-									{userData &&(
-										obj.user !== null && (
-										userData._id === obj.user._id && (
-											<button onClick={() => removePost(obj)}><img src={close} alt="" width='20px'/></button>
-										)
-										)
-									)}
+									
 									
 								</header>
+								
 								<main class="article__main comment__main">
 									{obj.imageUrl !== '' &&(
 										<img src={`http://localhost:4444${obj.imageUrl}`} alt="" />
 									)}
 									
 									<p class="article__text comment__text">{obj.text}</p>
+									<hr/>
+									
 									
 								</main>
-							</article>
-							</Link>
-							</li>
-							))
-						)}
-					</ul>
-				</div>
-			</section>
-			{/* Комменты */}
-			<section class=" section comments">
-				<div class="container">
-					<div class="block__header flex new_comment_fullPost">
-						<h2>Comments</h2>
-						{isAuth && (
-							<a href='#createComment'>
-							<button class="btn new-post-btn _flex--sb" id="new-post">
-								<svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-									<path d="M12 1V23M23 12H1" stroke="white" stroke-width="2" stroke-linecap="round"/>
-								</svg>
-								<span>New comment</span>
-							</button>
-						</a>
-						)}
-					</div>
-		
-					<ul class="articles__list">
-					{comments && (
-							(comments).map((obj, index) => (
-							<li class="articles__item">
-								
-							<article class="article article--minimized">
-								<header class="comment__header block__header flex gap comment_block">
-									<div className="gap">
-										<h3 class="article__title comment__title">{obj.title}</h3>
-										<div className="flex gap comment_fullName">
-											{obj.user !== null ? (<div class=" article__semi-title comment__author">{obj.user.fullName}</div>):(
-												<div class=" article__semi-title comment__author"><i>Пользователь удалён</i></div>
-											)}
-											{/* <div class=" article__semi-title comment__author">{date_comments}</div> */}
-											{day(obj.createdAt)}
-											{hour(obj.createdAt)}
-											{fullDate(index)}
-											<div class=" article__semi-title comment__author">{date_comment[index]}</div>
-										</div>
-									</div><br />
-									{userData &&(
+								<div class='tt'>
+								{userData &&(
 										obj.user !== null && (
 										userData._id === obj.user._id && (
-											<button onClick={() => removeComment(obj)}><img src={close} alt="" width='20px'/></button>
+											
+											<button class="btn btn-dark" onClick={() => removePost(obj)}><img src={close}  alt="" align-items="center" width='20px'/> Remove post</button>
 										)
 										)
 									)}
-									
-								</header>
-								<main class="article__main comment__main">
-									<p class="article__text comment__text">{obj.text}</p>
-									
-								</main>
+									<Link to={`/posts/${obj._id}`}>
+    
+    <a href="">
+    <button type="button" class="btn btn-dark position-relative shadow">
+    Посмотреть <span class="position-absolute top-0 start-100 translate-middle badge border border-light rounded-circle bg-danger p-2 "></span>
+    </button> </a>
+    </Link>
+									</div>
 							</article>
-							</li>
+							</div>
+							</div>
+							
+							
 							))
 						)}
-					</ul>
 				</div>
 			</section>
-			{isAuth&&(
-			<section class="section create-comment" id='createComment'>
-				<div class="container">
-					<form id="comment-creating-form" class="form">
-		
-						<div class="block__header">
-							<h2 class="form__name">Create comment</h2>
-						</div>
-		
-						<label for="comment-title" class="form__label">Title</label>
-						<input type="text" id="comment-title" class="form__input" defaultValue={title_comment} onChange = {(e) => setTitle_comment(e.target.value)}/>
-		
-						<label for="comment-body" class="form__label">Text</label>
-						<textarea id="comment-body" class="form__input" defaultValue={text_comment} onChange = {(e) => setText_comment(e.target.value)}></textarea>
-		
-						<input id="comment-submit" type="submit" class="btn" value="Add comment" onClick={addComment}/>
-					</form>
-				</div>
-				
-			</section>
-			
-			)};
 			</div>
 			</div>
 			</div>
