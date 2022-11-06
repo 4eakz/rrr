@@ -1,0 +1,167 @@
+
+.post{
+	width: 100%;
+	/* border: 1px solid white; */
+	/* background-color: #373434; */
+	background-color: #252525;
+	border-radius: 20px;
+	padding: 0px 20px 20px;
+	margin-bottom: 35px;
+}
+
+body::-webkit-scrollbar {
+    width: 12px;
+}
+.hidden{
+	/* opacity: 0; */
+	display: none;
+}
+.jcsb{
+	display: flex;
+	justify-content: space-between;
+}
+.cursor{
+	cursor: pointer;
+}
+.active_url{
+	background-color: #444;
+	transform: scale(1.1);
+	
+}
+
+.pagination_size_error{
+	color:rgb(255, 50, 50);
+	text-align: center;
+	font-size: 15px;
+}
+body::-webkit-scrollbar-track {
+    background: #444;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 20px;
+    border: 3px solid #444;
+}
+
+
+.post_looked_num{
+	margin-left: -15px;
+}
+.comment_fullName{
+	margin-top: 10px;
+}
+
+.comment_block{
+	justify-content: space-between;
+}
+
+.gap{
+	gap:15px;
+}
+.edit_post_inputs{
+	display: none;
+}
+
+.post:first-child{
+	margin-top: 10px;
+}
+.flex{
+	display: flex;
+}
+
+.new_comment_fullPost{
+	justify-content: space-between;
+}
+
+
+.user_actions{
+margin-top: 20px;
+}
+
+.flex_fullUser{
+	display: flex;
+	align-items: center;
+	gap: 30px;
+	/* justify-content: center; */
+}
+.fullPost_fullName{
+	margin-right: 20px;
+}
+.deleete_post{
+margin-right: 20px;
+}
+.post_text{
+	margin-top: 20px;
+	word-wrap: break-word;
+}
+.mt20{
+	margin-top: 20px;
+}
+.mb20{
+	margin-bottom: 20px;
+}
+.post:hover{
+	/* transition: 0.3s;  */
+	transform: scale(1.02);
+	border-color: #f9dd94;
+	cursor: pointer;
+}
+
+.post:hover .post_close{
+	display: inline;
+}
+
+.post_close{
+	position: absolute;
+	right: 15px;
+	display: none;
+}
+
+.post_header{
+	width: 100%;
+	height: 100px;
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	gap: 25px;
+	position: relative;
+}
+
+.post_header::after{
+	content: "";
+	position: absolute;
+	bottom:0px;
+  display: block;
+  width: 100%;
+  padding-top: 3px;
+  border-bottom: 2px solid #D17171;
+  border-bottom: 2px solid #FFF;
+  box-shadow: 0.2em 0.2em 10px rgba(122,122,122,0.5);
+  /* border-bottom: 2px solid #D17171; */
+}
+
+.fullName_header{
+	font-size: 25px;
+}
+
+.ml20{
+	margin-left: 20px;
+}
+.btn_image{
+    padding: 8px 12px;
+    border: solid #fff 1px;
+    border-radius: 10px;
+    line-height: 28px;
+    display: inline-block;
+    transition: 0.2s all;
+}
+.btn_image:hover {
+    transition: 0.3s all;
+    color: #000;
+    fill: #000;
+    background-color: #ffffff;
+}
+.btn_image_text{
+	font-size: 16px;
+}

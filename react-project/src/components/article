@@ -1,0 +1,41 @@
+
+/*POSTS*/
+
+.new-post-btn img {
+    margin-right: 10px;
+
+}
+.articles__list  >:not(:last-child) {
+    margin-bottom: 20px;
+}
+.article {
+    /* background-color: #373434; */
+    background-color: #252525;;
+    padding: 30px;
+    border-radius: 20px;
+}
+.article__semi-title {
+    font-size: 1.2em;
+    line-height: 28px;
+    color: #B8B8B8;
+}
+.article__main >:not(:last-child) {
+    margin-bottom: 20px;
+}
+.article__text {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.article--post {
+    font-size: 1rem;
+}
+
+.article--minimized {
+    font-size: 0.9rem;
+}
+
+.current-item .article__text {
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
